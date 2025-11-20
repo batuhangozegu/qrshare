@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'qr_type.dart';
 
 //yapay zeka
 class QRDataModel {
@@ -8,6 +9,7 @@ class QRDataModel {
   final String? logoPath;
   final String title;
   final DateTime createdAt;
+  final QRType type;
 
   QRDataModel({
     required this.id,
@@ -16,6 +18,7 @@ class QRDataModel {
     this.logoPath,
     required this.title,
     required this.createdAt,
+    this.type = QRType.link,
   });
 
   QRDataModel copyWith({
@@ -25,6 +28,7 @@ class QRDataModel {
     String? logoPath,
     String? title,
     DateTime? createdAt,
+    QRType? type,
   }) {
     return QRDataModel(
       id: id ?? this.id,
@@ -33,6 +37,7 @@ class QRDataModel {
       logoPath: logoPath ?? this.logoPath,
       title: title ?? this.title,
       createdAt: createdAt ?? this.createdAt,
+      type: type ?? this.type,
     );
   }
 
@@ -44,6 +49,7 @@ class QRDataModel {
       'logoPath': logoPath,
       'title': title,
       'createdAt': createdAt.toIso8601String(),
+      'type': type.index,
     };
   }
 
@@ -57,6 +63,7 @@ class QRDataModel {
       logoPath: json['logoPath'],
       title: json['title'],
       createdAt: DateTime.parse(json['createdAt']),
+      type: json['type'] != null ? QRType.values[json['type']] : QRType.link,
     );
   }
 }

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_cardInfo';
+import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_cardInfo.dart';
 import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_qr.dart';
 
 class HomeScreenQRCodeCard extends StatelessWidget {
   final String data;
+  final String title;
   final List<Color> gradientColors;
+  final VoidCallback? onCopy;
+  final VoidCallback? onTap;
+  final bool showData;
 
   const HomeScreenQRCodeCard({
     super.key,
     required this.data,
+    required this.title,
     this.gradientColors = const [Colors.blue, Colors.yellow],
+    this.onCopy,
+    this.onTap,
+    this.showData = true,
   });
 
   @override
@@ -25,7 +33,13 @@ class HomeScreenQRCodeCard extends StatelessWidget {
           Expanded(
             child: HomeScreenQR(data: data, gradientColors: gradientColors),
           ),
-          HomeScreenCardInfo(),
+          HomeScreenCardInfo(
+            title: title,
+            data: data,
+            onCopy: onCopy,
+            onTap: onTap,
+            showData: showData,
+          ),
         ],
       ),
     );
