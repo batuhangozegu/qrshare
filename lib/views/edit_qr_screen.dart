@@ -4,18 +4,21 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:qrshare/Compenents/custom_button.dart';
 import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_qr.dart';
 import 'package:qrshare/constants/qr_colors.dart';
-import 'package:qrshare/constants/qr_logos.dart';
 
 //Yapay Zeka İle Yapıldı
 
 class EditQRScreen extends StatefulWidget {
   final String initialData;
+  final String? initialTitle;
   final List<Color> initialColors;
+  final bool isCreating;
 
   const EditQRScreen({
     super.key,
-    required this.initialData,
-    required this.initialColors,
+    this.initialTitle,
+    this.initialData = "",
+    this.initialColors = const [Colors.blue, Colors.yellow],
+    this.isCreating = false,
   });
 
   @override
@@ -23,6 +26,7 @@ class EditQRScreen extends StatefulWidget {
 }
 
 class _EditQRScreenState extends State<EditQRScreen> {
+  late TextEditingController _titleController;
   late TextEditingController _dataController;
   late List<Color> selectedColors;
   bool useCustomColors = false;
@@ -30,6 +34,7 @@ class _EditQRScreenState extends State<EditQRScreen> {
   @override
   void initState() {
     super.initState();
+    _titleController = TextEditingController(text: widget.initialTitle ?? '');
     _dataController = TextEditingController(text: widget.initialData);
     selectedColors = List.from(widget.initialColors);
   }
@@ -92,7 +97,7 @@ class _EditQRScreenState extends State<EditQRScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QR Düzenle'),
+        title: Text(widget.isCreating ? 'QR Oluştur' : 'QR Düzenle'),
         backgroundColor: const Color(0xFF101922),
         elevation: 0,
       ),
@@ -120,7 +125,36 @@ class _EditQRScreenState extends State<EditQRScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
+                if (widget.isCreating) ...[
+                  const Text(
+                    'Başlık',
+                    style: TextStyle(
+                      color: Color(0xFFE1E1E1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _titleController,
+                    style: const TextStyle(color: Color(0xFFE1E1E1)),
+                    decoration: InputDecoration(
+                      hintText: 'QR kodun başlığı (ör: Instagram Profil)',
+                      hintStyle: const TextStyle(color: Color(0xFF8E8E93)),
+                      filled: true,
+                      fillColor: const Color(0xFF1C2127),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.title,
+                        color: Color(0xFF8E8E93),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
                 // Link Input
                 const Text(
                   'Link',
@@ -253,8 +287,8 @@ class _EditQRScreenState extends State<EditQRScreen> {
                     Expanded(
                       child: CustomButton(
                         backgroundColor: Colors.blue.shade900,
-                        icon: Icons.check,
-                        label: 'Kaydet',
+                        icon: widget.isCreating ? Icons.add : Icons.check,
+                        label: widget.isCreating ? 'Oluştur' : 'Kaydet',
                         onTap: _saveQR,
                       ),
                     ),

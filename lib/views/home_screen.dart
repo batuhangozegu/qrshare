@@ -14,9 +14,20 @@ class _HomeScreenState extends State<HomeScreen> {
   String qrData = 'https://www.instagram.com/batuhangozegu';
   List<Color> qrColors = [Colors.blue, Colors.yellow];
 
-  void _createQR() {
-    print("QR oluştur ekranına git");
-    // Daha sonra yapacağız
+  void _createQR() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const EditQRScreen(isCreating: true),
+      ),
+    );
+
+    if (result != null) {
+      setState(() {
+        qrData = result['data'];
+        qrColors = result['colors'];
+      });
+    }
   }
 
   void _showMyQRs() {
