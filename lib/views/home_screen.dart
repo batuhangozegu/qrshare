@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrshare/Compenents/homeScreen/home_screen_qrcode_card.dart';
+import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_qrcode_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
