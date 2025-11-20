@@ -3,7 +3,14 @@ import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_cardInfo';
 import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_qr.dart';
 
 class HomeScreenQRCodeCard extends StatelessWidget {
-  const HomeScreenQRCodeCard({super.key});
+  final String data;
+  final List<Color> gradientColors;
+
+  const HomeScreenQRCodeCard({
+    super.key,
+    required this.data,
+    this.gradientColors = const [Colors.blue, Colors.yellow],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,9 @@ class HomeScreenQRCodeCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: HomeScreenQR()),
+          Expanded(
+            child: HomeScreenQR(data: data, gradientColors: gradientColors),
+          ),
           HomeScreenCardInfo(),
         ],
       ),

@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:qrshare/Compenents/custom_button.dart';
 
 class HomeScreenButtonView extends StatelessWidget {
-  const HomeScreenButtonView({super.key});
+  final VoidCallback onCreateQR;
+  final VoidCallback onMyQRs;
+  final VoidCallback onEditQR;
+
+  const HomeScreenButtonView({
+    super.key,
+    required this.onCreateQR,
+    required this.onMyQRs,
+    required this.onEditQR,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +21,14 @@ class HomeScreenButtonView extends StatelessWidget {
           icon: Icons.add,
           backgroundColor: Colors.blue.shade900,
           label: "QR Kod Oluştur",
-          onTap: () => print("Qr kod oluştur"),
+          onTap: onCreateQR,
         ),
         CustomButton(
           icon: Icons.list_alt_rounded,
           label: "QR Kodlarım",
-          onTap: () => print("Qr kodlarım"),
+          onTap: onMyQRs,
         ),
-        CustomButton(
-          icon: Icons.edit,
-          label: "Qr Değiştir",
-          onTap: () => print("Qr kod oluştur"),
-        ),
+        CustomButton(icon: Icons.edit, label: "Qr Değiştir", onTap: onEditQR),
       ],
     );
   }

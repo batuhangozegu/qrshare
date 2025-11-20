@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:custom_qr_generator/custom_qr_generator.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class HomeScreenQR extends StatelessWidget {
-  const HomeScreenQR({super.key});
+  final String data;
+  final List<Color> gradientColors;
+
+  const HomeScreenQR({
+    super.key,
+    required this.data,
+    this.gradientColors = const [Colors.blue, Colors.yellow],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,33 +23,27 @@ class HomeScreenQR extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final size = constraints.maxWidth < constraints.maxHeight
-                ? constraints.maxWidth
-                : constraints.maxHeight;
-            return CustomPaint(
-              size: Size(size, size),
-              painter: QrPainter(
-                data: 'https://www.instagram.com/batuhangozegu',
-                options: const QrOptions(
-                  padding: 0,
-                  shapes: QrShapes(
-                    darkPixel: QrPixelShapeRoundCorners(),
-                    frame: QrFrameShapeRoundCorners(cornerFraction: 1),
-                    ball: QrBallShapeRoundCorners(cornerFraction: 1),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                colors: gradientColors,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+              child: PrettyQrView.data(
+                data: data,
+                decoration: const PrettyQrDecoration(
+                  shape: PrettyQrSmoothSymbol(
+                    color: Colors.white,
+                    roundFactor: 1,
                   ),
-                  colors: QrColors(
-                    dark: QrColorLinearGradient(
-                      colors: [Colors.blue, Colors.yellow],
-                      orientation: GradientOrientation.leftDiagonal,
-                    ),
-                    background: QrColorSolid(Colors.transparent),
-                  ),
+                  background: Colors.transparent,
                 ),
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
