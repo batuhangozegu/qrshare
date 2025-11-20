@@ -15,14 +15,13 @@ class HomeScreenQR extends StatelessWidget {
           topRight: Radius.circular(12),
         ),
       ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final size = constraints.maxWidth < constraints.maxHeight
-              ? constraints.maxWidth
-              : constraints.maxHeight;
-
-          return Center(
-            child: CustomPaint(
+      child: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final size = constraints.maxWidth < constraints.maxHeight
+                ? constraints.maxWidth
+                : constraints.maxHeight;
+            return CustomPaint(
               size: Size(size, size),
               painter: QrPainter(
                 data: 'https://www.instagram.com/batuhangozegu',
@@ -42,9 +41,9 @@ class HomeScreenQR extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

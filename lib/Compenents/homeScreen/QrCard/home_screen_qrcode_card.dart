@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrshare/Compenents/homeScreen/home_screen_cardInfo';
+import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_cardInfo';
 import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_qr.dart';
 
 class HomeScreenQRCodeCard extends StatelessWidget {
@@ -12,10 +12,11 @@ class HomeScreenQRCodeCard extends StatelessWidget {
       color: const Color(0xFF1C2127),
       borderRadius: BorderRadius.circular(12),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(flex: 1, child: HomeScreenQR()),
-          Expanded(flex: 1, child: HomeScreenCardInfo()),
+          Expanded(child: HomeScreenQR()),
+          HomeScreenCardInfo(),
         ],
       ),
     );

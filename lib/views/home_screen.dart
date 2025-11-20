@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qrshare/Compenents/custom_button.dart';
 import 'package:qrshare/Compenents/homeScreen/QrCard/home_screen_qrcode_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,7 +21,24 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
-              children: [Expanded(flex: 2, child: HomeScreenQRCodeCard())],
+              children: [
+                Expanded(
+                  flex: 3, // QR Card için alan
+                  child: const HomeScreenQRCodeCard(),
+                ),
+                const SizedBox(height: 1),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      CustomButton(
+                        label: "Deneme",
+                        onTap: () => print("tıklandı"),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
