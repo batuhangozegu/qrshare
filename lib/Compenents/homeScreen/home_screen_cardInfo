@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+
+class HomeScreenCardInfo extends StatelessWidget {
+  const HomeScreenCardInfo({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            'My Contact Card',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFFE1E1E1),
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            'Scan to view contact information',
+            style: TextStyle(fontSize: 14, color: Color(0xFF8E8E93)),
+          ),
+        ],
+      ),
+    );
+  }
+}
